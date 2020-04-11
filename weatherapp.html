@@ -28,51 +28,74 @@
         Submit
       </button>
     </form>
+
     <div id="app" v-show="submitted" v-cloak>
-      <h3>Name of the City: {{city}}</h3>
-      <h3>Time Of Last Observation (GMT): {{observation_time}}</h3>
-      <h3>Current Temperature Of The City: {{temperature}}C</h3>
-      <h3>Current Date & Local Time: {{localtime}}</h3>
-      <h3>Humidity: {{humidity}}%</h3>
-      <img :src="icon" />
+      <div class="container">
+        <div class="card mt-5">
+          <h2 class="card-header">Weather Chart</h2>
+          <table class="table">
+            <thead class="thead-dark">
+              <th></th>
+              <th>Name of the City:</th>
+              <th>Time Of Last Observation (GMT):</th>
+              <th>Current Temperature Of The City:</th>
+              <th>Current Date & Local Time:</th>
+              <th>Humidity:</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img :src="icon" /></td>
+                <td>{{city}}</td>
+                <td>{{observation_time}}</td>
+                <td>{{temperature}}C</td>
+                <td>{{localtime}}</td>
+                <td>{{humidity}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      var apiKey = "d96d6ea71d0d515f00a47cb5b4e4b67";
+      var url =
+        "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
+
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          city: "",
+          submitted: false,
+          observation_time: "",
+          temperature: "",
+          localtime: "",
+          icon: "",
+          humidity: "",
+        },
+
+        methods: {
+          process: function () {
+            this.submitted = true;
+            url = url + vm.city;
+
+            axios.get(url).then(function (res) {
+              console.clear();
+              console.log(res);
+
+              vm.city = res.data.location.name;
+              vm.observation_time = res.data.current.observation_time;
+              vm.temperature = res.data.current.temperature;
+              vm.localtime = res.data.location.localtime;
+              vm.icon = res.data.current.weather_icons;
+              vm.humidity = res.data.current.humidity;
+            });
+          },
+        },
+      });
+    </script>
   </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script>
-  var apiKey = "d96d6ea71d0d515f00a47cb5b4e4b67";
-  var url =
-    "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
-
-  var vm = new Vue({
-    el: "#app",
-    data: {
-      city: "",
-      submitted: false,
-      observation_time: "",
-      temperature: "",
-      localtime: "",
-      icon: "",
-      humidity: "",
-    },
-    methods: {
-      process: function () {
-        url = url + vm.city;
-        this.submitted = true;
-        axios.get(url).then(function (res) {
-          console.clear();
-          console.log(res);
-          vm.city = res.data.location.name;
-          vm.observation_time = res.data.current.observation_time;
-          vm.temperature = res.data.current.temperature;
-          vm.localtime = res.data.location.localtime;
-          vm.icon = res.data.current.weather_icons;
-          vm.humidity = res.data.current.humidity;
-        });
-      },
-    },
-  });
-</script>
