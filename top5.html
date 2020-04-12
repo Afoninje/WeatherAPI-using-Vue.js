@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<style>
+  [v-cloak] {
+    display: none;
+  }
+</style>
+
+<div v-cloak id="app">
+  <div class="container">
+    <div class="card mt-5">
+      <h2 class="card-header">Weather Of Major Cities</h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <th>Name of the City:</th>
+          <th>Current Temperature:</th>
+          <th>Current Pressure:</th>
+          <th>Current Humidity:</th>
+        </thead>
+        <tbody v-cloak>
+          <tr>
+            <td>{{city1}}</td>
+            <td>{{temp1}}°C</td>
+            <td>{{pressure1}} Pa</td>
+            <td>{{humidity1}}%</td>
+          </tr>
+          <tr>
+            <td>{{city2}}</td>
+            <td>{{temp2}}°C</td>
+            <td>{{pressure2}} Pa</td>
+            <td>{{humidity2}}%</td>
+          </tr>
+          <tr>
+            <td>{{city3}}</td>
+            <td>{{temp3}}°C</td>
+            <td>{{pressure3}} Pa</td>
+            <td>{{humidity3}}%</td>
+          </tr>
+          <tr>
+            <td>{{city4}}</td>
+            <td>{{temp4}}°C</td>
+            <td>{{pressure4}} Pa</td>
+            <td>{{humidity4}}%</td>
+          </tr>
+          <tr>
+            <td>{{city5}}</td>
+            <td>{{temp5}}°C</td>
+            <td>{{pressure5}} Pa</td>
+            <td>{{humidity5}}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      city1: "Mumbai",
+      city2: "London",
+      city3: "Chicago",
+      city4: "Paris",
+      city5: "Munich",
+      temp1: "",
+      temp2: "",
+      temp3: "",
+      temp4: "",
+      temp5: "",
+      pressure1: "",
+      pressure2: "",
+      pressure3: "",
+      pressure4: "",
+      pressure5: "",
+      humidity1: "",
+      humidity2: "",
+      humidity3: "",
+      humidity4: "",
+      humidity5: "",
+    },
+    created: function () {
+      var url =
+        "http://api.openweathermap.org/data/2.5/weather?q=mumbai&appid=25135e72f5adc283f9f3f7de7ddd2ff6&units=metric";
+      axios.get(url).then(function (res) {
+        console.clear();
+        console.log(res);
+        vm.temp1 = res.data.main.temp;
+        vm.pressure1 = res.data.main.pressure;
+        vm.humidity1 = res.data.main.humidity;
+      });
+
+      url =
+        "http://api.openweathermap.org/data/2.5/weather?q=london&appid=25135e72f5adc283f9f3f7de7ddd2ff6&units=metric";
+      axios.get(url).then(function (res) {
+        console.clear();
+        console.log(res);
+        vm.temp2 = res.data.main.temp;
+        vm.pressure2 = res.data.main.pressure;
+        vm.humidity2 = res.data.main.humidity;
+      });
+      url =
+        "http://api.openweathermap.org/data/2.5/weather?q=chicagon&appid=25135e72f5adc283f9f3f7de7ddd2ff6&units=metric";
+      axios.get(url).then(function (res) {
+        console.clear();
+        console.log(res);
+        vm.temp3 = res.data.main.temp;
+        vm.pressure3 = res.data.main.pressure;
+        vm.humidity3 = res.data.main.humidity;
+      });
+      url =
+        "http://api.openweathermap.org/data/2.5/weather?q=paris&appid=25135e72f5adc283f9f3f7de7ddd2ff6&units=metric";
+      axios.get(url).then(function (res) {
+        console.clear();
+        console.log(res);
+        vm.temp4 = res.data.main.temp;
+        vm.pressure4 = res.data.main.pressure;
+        vm.humidity4 = res.data.main.humidity;
+      });
+      url =
+        "http://api.openweathermap.org/data/2.5/weather?q=munich&appid=25135e72f5adc283f9f3f7de7ddd2ff6&units=metric";
+      axios.get(url).then(function (res) {
+        console.clear();
+        console.log(res);
+        vm.temp5 = res.data.main.temp;
+        vm.pressure5 = res.data.main.pressure;
+        vm.humidity5 = res.data.main.humidity;
+      });
+    },
+  });
+</script>

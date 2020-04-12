@@ -11,6 +11,15 @@
     display: none;
   }
 </style>
+<div class="container">
+  <form class="mt-5">
+    <button class="btn btn-primary">
+      <a href="top5.html" style="color: white;">
+        Click here to view the temperature of 5 Major cities
+      </a>
+    </button>
+  </form>
+</div>
 
 <div id="app">
   <div class="container">
@@ -47,7 +56,7 @@
                 <td><img :src="icon" /></td>
                 <td>{{city}}</td>
                 <td>{{observation_time}}</td>
-                <td>{{temperature}}C</td>
+                <td>{{temperature}}°C</td>
                 <td>{{localtime}}</td>
                 <td>{{humidity}}%</td>
               </tr>
