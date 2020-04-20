@@ -98,20 +98,18 @@
               <h2 class="card-header">Information for: {{city}}</h2>
               <table class="table">
                 <thead class="thead-dark">
-                  <th></th>
-                  <th>Time Of Last Observation (GMT):</th>
-                  <th>Current Temperature Of The City:</th>
-                  <th>Current Date & Local Time:</th>
-                  <th>Humidity:</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><img :src="icon" /></td>
-                    <td>{{observation_time}}</td>
-                    <td>{{temperature}}°C</td>
-                    <td>{{localtime}}</td>
-                    <td>{{humidity}}%</td>
-                  </tr>
+                <th>Current Temperature:</th>
+                <th>Description:</th>
+                <th>Current Pressure:</th>
+                <th>Current Humidity:</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{findtemp}}°C</td>
+                  <td>{{finddesc}}</td>
+                  <td>{{findpressure}}</td>
+                  <td>{{findhumidity}}%</td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -125,11 +123,10 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-      var apiKey = "d96d6ea71d0d515f00a47cb5b4e4b67";
       var url =
-        "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
+        "https://api.openweathermap.org/data/2.5/weather?q=&appid=ad59e4fb24b7f88d5eaf006cc977159e";
       var urlcopy =
-        "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
+      "https://api.openweathermap.org/data/2.5/weather?q=&appid=ad59e4fb24b7f88d5eaf006cc977159e";
 
       var vm = new Vue({
         el: "#app",
@@ -140,10 +137,10 @@
           submitted: false,
           usersubmitted: false,
           observation_time: "",
-          temperature: "",
-          localtime: "",
-          icon: "",
-          humidity: "",
+          findtemp: "",
+          finddesc: "",
+          findhumidity: "",
+          findpressure: "",
           error: "",
           lat: "",
           lon: "",
@@ -156,19 +153,24 @@
         methods: {
           process: function () {
             this.submitted = true;
+
             vm.city = vm.citycopy;
-            url = url + vm.city;
+
+            var url =
+            "https://api.openweathermap.org/data/2.5/weather?q="+vm.city+"&appid=ad59e4fb24b7f88d5eaf006cc977159e";
+        
 
             axios.get(url).then(function (res) {
               console.clear();
               console.log(res);
 
-              vm.city = res.data.location.name;
-              vm.observation_time = res.data.current.observation_time;
-              vm.temperature = res.data.current.temperature;
-              vm.localtime = res.data.location.localtime;
-              vm.icon = res.data.current.weather_icons;
-              vm.humidity = res.data.current.humidity;
+              vm.finddesc = res.data.weather[0].description;
+              vm.findhumidity = res.data.main.humidity;
+              vm.findpressure = res.data.main.pressure;
+              vm.findtemp = res.data.main.temp;
+              vm.findtemp = vm.findtemp - 273.15;
+              vm.findtemp = vm.findtemp.toFixed(2);
+
 
               url = urlcopy;
             });
