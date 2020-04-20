@@ -127,9 +127,9 @@
     <script>
       var apiKey = "d96d6ea71d0d515f00a47cb5b4e4b67";
       var url =
-        "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
+        "https://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
       var urlcopy =
-        "http://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
+        "https://api.weatherstack.com/current?access_key=" + apiKey + "f&query=";
 
       var vm = new Vue({
         el: "#app",
@@ -187,7 +187,7 @@
 
             axios
               .get(
-                "http://api.openweathermap.org/data/2.5/weather?lat=" +
+                "https://api.openweathermap.org/data/2.5/weather?lat=" +
                   this.lat +
                   "&lon=" +
                   this.lon +
