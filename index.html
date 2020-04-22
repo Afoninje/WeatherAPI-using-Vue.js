@@ -27,20 +27,7 @@
     crossorigin="anonymous"
   />
 
-  <style>
-    [v-cloak] {
-      display: none;
-    }
-    body {
-      background-image: url(WeatherPhotos/bg3.jpg);
-      height: 100%;
-
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 
   <body>
     <div id="app" class="background">
@@ -85,10 +72,10 @@
                 <table class="table table-bordered table-responsive-sm">
                   <thead class="thead-dark">
                     <th></th>
-                    <th>Current Temperature:</th>
-                    <th>Description:</th>
-                    <th>Current Pressure:</th>
-                    <th>Current Humidity:</th>
+                    <th class="text-center">Current Temperature:</th>
+                    <th class="text-center">Description:</th>
+                    <th class="text-center">Current Pressure:</th>
+                    <th class="text-center">Current Humidity:</th>
                   </thead>
                   <tbody>
                     <tr>
@@ -105,15 +92,15 @@
           </div>
           <div id="app" v-cloak v-show="usersubmitted">
             <div class="container">
-              <div class="card mt-5">
+              <div class="card">
                 <h2 class="card-header">Your Current Location</h2>
                 <table class="table table-bordered table-responsive-sm">
                   <thead class="thead-dark">
                     <th></th>
-                    <th>Current Temperature:</th>
-                    <th>Description:</th>
-                    <th>Current Pressure:</th>
-                    <th>Current Humidity:</th>
+                    <th th class="text-center">Current Temperature:</th>
+                    <th th class="text-center">Description:</th>
+                    <th th class="text-center">Current Pressure:</th>
+                    <th th class="text-center">Current Humidity:</th>
                   </thead>
                   <tbody>
                     <tr>
