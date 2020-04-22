@@ -31,97 +31,101 @@
     [v-cloak] {
       display: none;
     }
-  
+    body {
+      background-image: url(WeatherPhotos/bg3.jpg);
+      height: 100%;
 
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   </style>
 
   <body>
-    
-    </div>
-    <div id="app">
+    <div id="app" class="background">
       <div class="container">
-      <form class="mt-5">
-        <div class="form-group">
-          <h1>If using this on a mobile phone , please turn on location in the settings</h1>
-          <button
-            type="submit"
-            @click.prevent="myFunction()"
-            class="btn btn-primary"
-          >
-            Click Here To Get Information About Your Current Location
-          </button>
-        </div>
-      </div>
-      </form>
-      <div id="app" v-cloak v-show="usersubmitted">
         <div class="container">
-          <div class="card mt-5">
-            <h2 class="card-header">Your Current Location</h2>
-            <table class="table">
-              <thead class="thead-dark">
-                <th></th>
-                <th>Current Temperature:</th>
-                <th>Description:</th>
-                <th>Current Pressure:</th>
-                <th>Current Humidity:</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><img :src="usermaindesc"/></td>
-                  <td>{{usertemp}}°C</td>
-                  <td>{{userdesc}}</td>
-                  <td>{{userpressure}} Pa</td>
-                  <td>{{userhumidity}}%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+          <form class="mt-5">
+            <div class="form-group">
+              <strong style="color: black;">Search for City</strong>
+              <input
+                type="text"
+                v-model="citycopy"
+                id="citysearch"
+                class="form-control form-control-lg"
+              />
+            </div>
 
-      <div class="container">
-        <form class="mt-5">
-          <div class="form-group">
-            <label>Search for City</label>
-            <input
-              type="text"
-              v-model="citycopy"
-              id="citysearch"
-              class="form-control form-control-lg"
-            />
-          </div>
-
-          <button
-            type="submit"
-            @click.prevent="process"
-            class="btn btn-primary"
+            <button
+              type="submit"
+              @click.prevent="process"
+              class="btn btn-primary"
+            >
+              Search
+            </button>
+            <button
+              type="submit"
+              @click.prevent="myFunction()"
+              class="btn btn-primary"
+            >
+              Information About Your Current Location
+            </button>
+          </form>
+          <strong style="color: aliceblue;"
+            >Note: You will only be able to get information about your current
+            location on mobile devices if you have locations turned on in the
+            settings</strong
           >
-            Submit
-          </button>
-        </form>
 
-        <div id="app" v-show="submitted" v-cloak>
-          <div class="container" background>
-            <div class="card mt-5">
-              <h2 class="card-header">Information for: {{city}}</h2>
-              <table class="table">
-                <thead class="thead-dark">
-                <th></th>
-                <th>Current Temperature:</th>
-                <th>Description:</th>
-                <th>Current Pressure:</th>
-                <th>Current Humidity:</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><img :src="findmaindesc"/></td>
-                  <td>{{findtemp}}°C</td>
-                  <td>{{finddesc}}</td>
-                  <td>{{findpressure}} Pa</td>
-                  <td>{{findhumidity}}%</td>
-                </tr>
-                </tbody>
-              </table>
+          <div id="app" v-show="submitted" v-cloak>
+            <div class="container" background>
+              <div class="card mt-5">
+                <h2 class="card-header">Information for: {{city}}</h2>
+                <table class="table table-bordered table-responsive-sm">
+                  <thead class="thead-dark">
+                    <th></th>
+                    <th>Current Temperature:</th>
+                    <th>Description:</th>
+                    <th>Current Pressure:</th>
+                    <th>Current Humidity:</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center"><img :src="findmaindesc" /></td>
+                      <td class="text-center">{{findtemp}}°C</td>
+                      <td class="text-center">{{finddesc}}</td>
+                      <td class="text-center">{{findpressure}} Pa</td>
+                      <td class="text-center">{{findhumidity}}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="app" v-cloak v-show="usersubmitted">
+            <div class="container">
+              <div class="card mt-5">
+                <h2 class="card-header">Your Current Location</h2>
+                <table class="table table-bordered table-responsive-sm">
+                  <thead class="thead-dark">
+                    <th></th>
+                    <th>Current Temperature:</th>
+                    <th>Description:</th>
+                    <th>Current Pressure:</th>
+                    <th>Current Humidity:</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center"><img :src="usermaindesc" /></td>
+                      <td class="text-center">{{usertemp}}°C</td>
+                      <td class="text-center">{{userdesc}}</td>
+                      <td class="text-center">{{userpressure}} Pa</td>
+                      <td class="text-center">{{userhumidity}}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +140,7 @@
       var url =
         "https://api.openweathermap.org/data/2.5/weather?q=&appid=ad59e4fb24b7f88d5eaf006cc977159e";
       var urlcopy =
-      "https://api.openweathermap.org/data/2.5/weather?q=&appid=ad59e4fb24b7f88d5eaf006cc977159e";
+        "https://api.openweathermap.org/data/2.5/weather?q=&appid=ad59e4fb24b7f88d5eaf006cc977159e";
 
       var vm = new Vue({
         el: "#app",
@@ -168,12 +172,14 @@
         methods: {
           process: function () {
             this.submitted = true;
+            this.usersubmitted = false;
 
             vm.city = vm.citycopy;
 
             var url =
-            "https://api.openweathermap.org/data/2.5/weather?q="+vm.city+"&appid=ad59e4fb24b7f88d5eaf006cc977159e";
-        
+              "https://api.openweathermap.org/data/2.5/weather?q=" +
+              vm.city +
+              "&appid=ad59e4fb24b7f88d5eaf006cc977159e";
 
             axios.get(url).then(function (res) {
               console.clear();
@@ -188,47 +194,27 @@
               vm.findIconCode = res.data.weather[0].icon;
               vm.findmaindesc = res.data.weather[0].main;
 
-
-                if(vm.findIconCode == "01d")
-                {
-                  vm.findmaindesc="WeatherPhotos/sunny.gif";
-                }
-                else if(vm.findIconCode == "01n")
-                {
-                  vm.findmaindesc="WeatherPhotos/night.gif";
-                }
-                else if(vm.findmaindesc == "Clouds")
-                {
-                  vm.findmaindesc="WeatherPhotos/partlycloud.gif";
-                }
-                else if(vm.findmaindesc == "Snow")
-                {
-                  vm.findmaindesc="WeatherPhotos/snow.gif";
-                }
-                else if(vm.findmaindesc == "Rain")
-                {
-                  vm.findmaindesc="WeatherPhotos/rain.gif";
-                }
-                else if(vm.findmaindesc == "Drizzle")
-                {
-                  vm.findmaindesc="WeatherPhotos/rain.gif";
-                }
-                else if(vm.findmaindesc == "Thunderstorm")
-                {
-                  vm.findmaindesc="WeatherPhotos/thunder.gif";
-                }
-                else if(vm.findmaindesc == "Dust")
-                {
-                  vm.findmaindesc="WeatherPhotos/Wind.gif";
-                }
-                else if(vm.findmaindesc == "Tornado")
-                {
-                  vm.findmaindesc="WeatherPhotos/Wind.gif";
-                }
-                else
-                {
-                  vm.findmaindesc="WeatherPhotos/Mist.gif";
-                }
+              if (vm.findIconCode == "01d") {
+                vm.findmaindesc = "WeatherPhotos/sunny.gif";
+              } else if (vm.findIconCode == "01n") {
+                vm.findmaindesc = "WeatherPhotos/night.gif";
+              } else if (vm.findmaindesc == "Clouds") {
+                vm.findmaindesc = "WeatherPhotos/partlycloud.gif";
+              } else if (vm.findmaindesc == "Snow") {
+                vm.findmaindesc = "WeatherPhotos/snow.gif";
+              } else if (vm.findmaindesc == "Rain") {
+                vm.findmaindesc = "WeatherPhotos/rain.gif";
+              } else if (vm.findmaindesc == "Drizzle") {
+                vm.findmaindesc = "WeatherPhotos/rain.gif";
+              } else if (vm.findmaindesc == "Thunderstorm") {
+                vm.findmaindesc = "WeatherPhotos/thunder.gif";
+              } else if (vm.findmaindesc == "Dust") {
+                vm.findmaindesc = "WeatherPhotos/Wind.gif";
+              } else if (vm.findmaindesc == "Tornado") {
+                vm.findmaindesc = "WeatherPhotos/Wind.gif";
+              } else {
+                vm.findmaindesc = "WeatherPhotos/Mist.gif";
+              }
 
               url = urlcopy;
             });
@@ -266,50 +252,30 @@
                 vm.userIconCode = res2.data.weather[0].icon;
                 vm.usermaindesc = res2.data.weather[0].main;
 
-                if(vm.userIconCode == "01d")
-                {
-                  vm.usermaindesc="WeatherPhotos/sunny.gif";
+                if (vm.userIconCode == "01d") {
+                  vm.usermaindesc = "WeatherPhotos/sunny.gif";
+                } else if (vm.userIconCode == "01n") {
+                  vm.usermaindesc = "WeatherPhotos/night.gif";
+                } else if (vm.usermaindesc == "Clouds") {
+                  vm.usermaindesc = "WeatherPhotos/partlycloud.gif";
+                } else if (vm.usermaindesc == "Snow") {
+                  vm.usermaindesc = "WeatherPhotos/snow.gif";
+                } else if (vm.usermaindesc == "Rain") {
+                  vm.usermaindesc = "WeatherPhotos/rain.gif";
+                } else if (vm.usermaindesc == "Drizzle") {
+                  vm.usermaindesc = "WeatherPhotos/rain.gif";
+                } else if (vm.usermaindesc == "Thunderstorm") {
+                  vm.usermaindesc = "WeatherPhotos/thunder.gif";
+                } else if (vm.usermaindesc == "Dust") {
+                  vm.usermaindesc = "WeatherPhotos/Wind.gif";
+                } else if (vm.usermaindesc == "Tornado") {
+                  vm.usermaindesc = "WeatherPhotos/Wind.gif";
+                } else {
+                  vm.usermaindesc = "WeatherPhotos/Mist.gif";
                 }
-                else if(vm.userIconCode == "01n")
-                {
-                  vm.usermaindesc="WeatherPhotos/night.gif";
-                }
-                else if(vm.usermaindesc == "Clouds")
-                {
-                  vm.usermaindesc="WeatherPhotos/partlycloud.gif";
-                }
-                else if(vm.usermaindesc == "Snow")
-                {
-                  vm.usermaindesc="WeatherPhotos/snow.gif";
-                }
-                else if(vm.usermaindesc == "Rain")
-                {
-                  vm.usermaindesc="WeatherPhotos/rain.gif";
-                }
-                else if(vm.usermaindesc == "Drizzle")
-                {
-                  vm.usermaindesc="WeatherPhotos/rain.gif";
-                }
-                else if(vm.usermaindesc == "Thunderstorm")
-                {
-                  vm.usermaindesc="WeatherPhotos/thunder.gif";
-                }
-                else if(vm.usermaindesc == "Dust")
-                {
-                  vm.usermaindesc="WeatherPhotos/Wind.gif";
-                }
-                else if(vm.usermaindesc == "Tornado")
-                {
-                  vm.usermaindesc="WeatherPhotos/Wind.gif";
-                }
-                else
-                {
-                  vm.usermaindesc="WeatherPhotos/Mist.gif";
-                }
-
-
               });
             this.usersubmitted = true;
+            this.submitted = false;
           },
         },
       });
