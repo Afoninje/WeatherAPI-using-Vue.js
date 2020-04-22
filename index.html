@@ -26,13 +26,18 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous"
   />
+
   <style>
     [v-cloak] {
       display: none;
     }
+  
+
   </style>
 
   <body>
+    
+    </div>
     <div id="app">
       <div class="container">
       <form class="mt-5">
@@ -53,6 +58,7 @@
             <h2 class="card-header">Your Current Location</h2>
             <table class="table">
               <thead class="thead-dark">
+                <th></th>
                 <th>Current Temperature:</th>
                 <th>Description:</th>
                 <th>Current Pressure:</th>
@@ -60,9 +66,10 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><img :src="usermaindesc"/></td>
                   <td>{{usertemp}}°C</td>
                   <td>{{userdesc}}</td>
-                  <td>{{userpressure}}</td>
+                  <td>{{userpressure}} Pa</td>
                   <td>{{userhumidity}}%</td>
                 </tr>
               </tbody>
@@ -93,11 +100,12 @@
         </form>
 
         <div id="app" v-show="submitted" v-cloak>
-          <div class="container">
+          <div class="container" background>
             <div class="card mt-5">
               <h2 class="card-header">Information for: {{city}}</h2>
               <table class="table">
                 <thead class="thead-dark">
+                <th></th>
                 <th>Current Temperature:</th>
                 <th>Description:</th>
                 <th>Current Pressure:</th>
@@ -105,9 +113,10 @@
               </thead>
               <tbody>
                 <tr>
+                  <td><img :src="findmaindesc"/></td>
                   <td>{{findtemp}}°C</td>
                   <td>{{finddesc}}</td>
-                  <td>{{findpressure}}</td>
+                  <td>{{findpressure}} Pa</td>
                   <td>{{findhumidity}}%</td>
                 </tr>
                 </tbody>
@@ -148,6 +157,11 @@
           usertemp: "",
           userpressure: "",
           userhumidity: "",
+          findIconCode: "",
+          userIconCode: "",
+          displayImageURL: "",
+          usermaindesc: "",
+          findmaindesc: "",
         },
 
         methods: {
@@ -170,7 +184,50 @@
               vm.findtemp = res.data.main.temp;
               vm.findtemp = vm.findtemp - 273.15;
               vm.findtemp = vm.findtemp.toFixed(2);
+              vm.findIconCode = res.data.weather[0].icon;
+              vm.findmaindesc = res.data.weather[0].main;
 
+
+                if(vm.findIconCode == "01d")
+                {
+                  vm.findmaindesc="WeatherPhotos/sunny.gif";
+                }
+                else if(vm.findIconCode == "01n")
+                {
+                  vm.findmaindesc="WeatherPhotos/night.gif";
+                }
+                else if(vm.findmaindesc == "Clouds")
+                {
+                  vm.findmaindesc="WeatherPhotos/partlycloud.gif";
+                }
+                else if(vm.findmaindesc == "Snow")
+                {
+                  vm.findmaindesc="WeatherPhotos/snow.gif";
+                }
+                else if(vm.findmaindesc == "Rain")
+                {
+                  vm.findmaindesc="WeatherPhotos/rain.gif";
+                }
+                else if(vm.findmaindesc == "Drizzle")
+                {
+                  vm.findmaindesc="WeatherPhotos/rain.gif";
+                }
+                else if(vm.findmaindesc == "Thunderstorm")
+                {
+                  vm.findmaindesc="WeatherPhotos/thunder.gif";
+                }
+                else if(vm.findmaindesc == "Dust")
+                {
+                  vm.findmaindesc="WeatherPhotos/Wind.gif";
+                }
+                else if(vm.findmaindesc == "Tornado")
+                {
+                  vm.findmaindesc="WeatherPhotos/Wind.gif";
+                }
+                else
+                {
+                  vm.findmaindesc="WeatherPhotos/Mist.gif";
+                }
 
               url = urlcopy;
             });
@@ -204,6 +261,52 @@
                 vm.userpressure = res2.data.main.pressure;
                 vm.usertemp = res2.data.main.temp;
                 vm.usertemp = vm.usertemp - 273.15;
+                vm.usertemp = vm.usertemp.toFixed(2);
+                vm.userIconCode = res2.data.weather[0].icon;
+                vm.usermaindesc = res2.data.weather[0].main;
+
+                if(vm.userIconCode == "01d")
+                {
+                  vm.usermaindesc="WeatherPhotos/sunny.gif";
+                }
+                else if(vm.userIconCode == "01n")
+                {
+                  vm.usermaindesc="WeatherPhotos/night.gif";
+                }
+                else if(vm.usermaindesc == "Clouds")
+                {
+                  vm.usermaindesc="WeatherPhotos/partlycloud.gif";
+                }
+                else if(vm.usermaindesc == "Snow")
+                {
+                  vm.usermaindesc="WeatherPhotos/snow.gif";
+                }
+                else if(vm.usermaindesc == "Rain")
+                {
+                  vm.usermaindesc="WeatherPhotos/rain.gif";
+                }
+                else if(vm.usermaindesc == "Drizzle")
+                {
+                  vm.usermaindesc="WeatherPhotos/rain.gif";
+                }
+                else if(vm.usermaindesc == "Thunderstorm")
+                {
+                  vm.usermaindesc="WeatherPhotos/thunder.gif";
+                }
+                else if(vm.usermaindesc == "Dust")
+                {
+                  vm.usermaindesc="WeatherPhotos/Wind.gif";
+                }
+                else if(vm.usermaindesc == "Tornado")
+                {
+                  vm.usermaindesc="WeatherPhotos/Wind.gif";
+                }
+                else
+                {
+                  vm.usermaindesc="WeatherPhotos/Mist.gif";
+                }
+
+
               });
             this.usersubmitted = true;
           },
