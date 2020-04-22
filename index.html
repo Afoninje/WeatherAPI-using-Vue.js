@@ -69,21 +69,30 @@
             <div class="container" background>
               <div class="card mt-5">
                 <h2 class="card-header">Information for: {{city}}</h2>
-                <table class="table table-bordered table-responsive-sm">
-                  <thead class="thead-dark">
-                    <th></th>
-                    <th class="text-center">Current Temperature:</th>
-                    <th class="text-center">Description:</th>
-                    <th class="text-center">Current Pressure:</th>
-                    <th class="text-center">Current Humidity:</th>
+                <table
+                  role="table"
+                  class="table table-bordered table-responsive-sm"
+                >
+                  <thead role="rowgroup" class="thead-dark">
+                    <tr role="row">
+                      <th></th>
+                      <th role="columnheader">Current Temperature:</th>
+                      <th role="columnheader">Description:</th>
+                      <th role="columnheader">Current Pressure:</th>
+                      <th role="columnheader">Current Humidity:</th>
+                    </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-center"><img :src="findmaindesc" /></td>
-                      <td class="text-center">{{findtemp}}°C</td>
-                      <td class="text-center">{{finddesc}}</td>
-                      <td class="text-center">{{findpressure}} Pa</td>
-                      <td class="text-center">{{findhumidity}}%</td>
+                  <tbody role="rowgroup">
+                    <tr role="row">
+                      <td class="text-center" role="cell">
+                        <img :src="findmaindesc" />
+                      </td>
+                      <td class="text-center" role="cell">{{findtemp}}°C</td>
+                      <td class="text-center" role="cell">{{finddesc}}</td>
+                      <td class="text-center" role="cell">
+                        {{findpressure}} Pa
+                      </td>
+                      <td class="text-center" role="cell">{{findhumidity}}%</td>
                     </tr>
                   </tbody>
                 </table>
