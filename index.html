@@ -211,17 +211,14 @@
             />
           </div>
 
-          <button
-            type="submit"
-            @click.prevent="process"
-            class="btn btn-primary"
-          >
+          <button type="submit" @click.prevent="process" class="btn btn-dark">
             Search
           </button>
+
           <button
             type="submit"
             @click.prevent="myFunction()"
-            class="btn btn-primary"
+            class="btn btn-dark"
           >
             Information About Your Current Location
           </button>
@@ -236,7 +233,7 @@
           <div class="style">
             <div class="widget">
               <div class="city">
-                {{city}}
+                {{city}}, {{findcountry}}
               </div>
               <div class="left-panel panel">
                 <div class="date">
@@ -247,8 +244,9 @@
                   {{findtemp}}&deg;
                 </div>
                 <div class="date">
-                  Pressure:{{findpressure}} Pa <br />
-                  Humidity:{{findhumidity}}%
+                  Pressure: {{findpressure}} Pa <br />
+                  Humidity: {{findhumidity}}% <br />
+                  Wind Speed: {{findwind}} Km/H
                 </div>
               </div>
             </div>
@@ -257,7 +255,9 @@
         <div id="app" v-cloak v-show="usersubmitted">
           <div class="style">
             <div class="widget">
-              <div class="city"></div>
+              <div class="city">
+                {{userlocation}}, {{usercountry}}
+              </div>
               <div class="left-panel panel">
                 <div class="date">
                   {{userdesc}}
@@ -267,8 +267,9 @@
                   {{usertemp}}&deg;
                 </div>
                 <div class="date">
-                  Pressure:{{userpressure}} Pa <br />
-                  Humidity:{{userhumidity}}%
+                  Pressure: {{userpressure}} Pa <br />
+                  Humidity: {{userhumidity}}%<br />
+                  Wind Speed: {{userwind}} Km/H
                 </div>
               </div>
             </div>

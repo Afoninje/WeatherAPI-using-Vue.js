@@ -32,7 +32,9 @@ body {
   tr {
     margin: 0 0 1rem 0;
   }
-
+  .btn {
+    margin-bottom: 10px;
+  }
   tr:nth-child(odd) {
     background: white;
   }
@@ -183,4 +185,3 @@ div.right-panel {
   margin-top: 35px;
   padding-left: 10px;
 }
-
