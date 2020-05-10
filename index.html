@@ -198,79 +198,77 @@
     <script src="main.js"></script>
     <!-- scripts for pre-loader -->
 
-    <div id="app" class="background">
+    <div id="app">
       <div class="container">
-        <div class="container">
-          <form class="mt-5">
-            <div class="form-group">
-              <strong style="color: black;">Search for City</strong>
-              <input
-                type="text"
-                v-model="citycopy"
-                id="citysearch"
-                class="form-control form-control-lg"
-              />
-            </div>
+        <form class="mt-5">
+          <div class="form-group">
+            <strong style="color: black;">Search for City</strong>
+            <input
+              type="text"
+              v-model="citycopy"
+              id="citysearch"
+              class="form-control form-control-lg"
+            />
+          </div>
 
-            <button
-              type="submit"
-              @click.prevent="process"
-              class="btn btn-primary"
-            >
-              Search
-            </button>
-            <button
-              type="submit"
-              @click.prevent="myFunction()"
-              class="btn btn-primary"
-            >
-              Information About Your Current Location
-            </button>
-          </form>
-          <strong style="color: aliceblue;"
-            >Note: You will only be able to get information about your current
-            location on mobile devices if you have locations turned on in the
-            settings</strong
+          <button
+            type="submit"
+            @click.prevent="process"
+            class="btn btn-primary"
           >
+            Search
+          </button>
+          <button
+            type="submit"
+            @click.prevent="myFunction()"
+            class="btn btn-primary"
+          >
+            Information About Your Current Location
+          </button>
+        </form>
+        <strong style="color: black;"
+          >Note: You will only be able to get information about your current
+          location on mobile devices if you have locations turned on in the
+          settings</strong
+        >
 
-          <div id="app" v-show="submitted" v-cloak>
-            <div class="style">
-              <div class="widget">
-                <div class="left-panel panel">
-                  <div class="date">
-                    Monday, 20 Aug 2018 {{finddesc}}
-                  </div>
-                  <div class="city">
-                    {{city}}
-                  </div>
-                  <div class="temp">
-                    <img :src="findmaindesc" />
-                    {{findtemp}}&deg;
-                  </div>
-                  <div class="date">
-                    Pressure:{{findpressure}} Humidity:{{findhumidity}}
-                  </div>
+        <div id="app" v-show="submitted" v-cloak>
+          <div class="style">
+            <div class="widget">
+              <div class="city">
+                {{city}}
+              </div>
+              <div class="left-panel panel">
+                <div class="date">
+                  {{finddesc}}
+                </div>
+                <div class="temp">
+                  <img height="150" width="150" :src="findmaindesc" />
+                  {{findtemp}}&deg;
+                </div>
+                <div class="date">
+                  Pressure:{{findpressure}} Pa <br />
+                  Humidity:{{findhumidity}}%
                 </div>
               </div>
             </div>
           </div>
-          <div id="app" v-cloak v-show="usersubmitted">
-            <div class="style">
-              <div class="widget">
-                <div class="left-panel panel">
-                  <div class="date">
-                    Monday, 20 Aug 2018 {{userdesc}}
-                  </div>
-                  <!-- <div class="city">
-                    {{city}}
-                  </div> -->
-                  <div class="temp">
-                    <img :src="usermaindesc" />
-                    {{usertemp}}&deg;
-                  </div>
-                  <div class="date">
-                    Pressure:{{userpressure}} Humidity:{{userhumidity}}
-                  </div>
+        </div>
+        <div id="app" v-cloak v-show="usersubmitted">
+          <div class="style">
+            <div class="widget">
+              <div class="city"></div>
+              <div class="left-panel panel">
+                <div class="date">
+                  {{userdesc}}
+                </div>
+                <div class="temp">
+                  <img height="150" width="150" :src="usermaindesc" />
+                  {{usertemp}}&deg;
+                </div>
+                <div class="date">
+                  Pressure:{{userpressure}} Pa <br />
+                  Humidity:{{userhumidity}}%
                 </div>
               </div>
             </div>
